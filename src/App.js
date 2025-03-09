@@ -1,6 +1,5 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // 📌 Importando estilos de Bootstrap
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Cart from './routes/Cart';
 //import Home from './routes/Home';
 import SalesForm from './routes/Salesform'; // 📌 Agregado
@@ -12,10 +11,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Navigate to="/products"/>} /> {/* 📌 Cambiado */}
           <Route path="/products" element={<SalesForm />} /> {/* 📌 Agregado */}
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/carts" element={<Cart />} />
           <Route path="/add-product" element={<AddProduct />} /> {/* 📌 Nueva ruta */}
-          <Route path="/update-product/:id" element={<UpdateProduct />} /> {/* 📌 Nueva ruta */}
+          <Route path="/products/:id" element={<UpdateProduct />} /> {/* 📌 Nueva ruta */}
         </Routes>
       </BrowserRouter>
     </div>

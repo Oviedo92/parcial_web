@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const UpdateProduct = () => {
     const navigate = useNavigate();
@@ -11,28 +10,27 @@ const UpdateProduct = () => {
         description: "",
         price: "",
         image: "",
+        preview: "",
     });
 
-    // Cargar el producto desde LocalStorage
     useEffect(() => {
         const storedProducts = JSON.parse(localStorage.getItem("productos")) || [];
-        const existingProduct = storedProducts.find(prod => prod.id === parseInt(id));
-        if (existingProduct) {
-            setProduct(existingProduct);
+        const productToEdit = storedProducts.find((p) => p.id === Number(id));
+        if (productToEdit) {
+            setProduct({ ...productToEdit, preview: productToEdit.image }); // Cargar vista previa
         } else {
             alert("Producto no encontrado");
             navigate("/products");
         }
     }, [id, navigate]);
 
-    // Manejar cambios en los inputs
     const handleChange = (e) => {
         if (e.target.name === "image") {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    setProduct({ ...product, image: reader.result, preview: reader.result });
+                    setProduct((prev) => ({ ...prev, image: reader.result, preview: reader.result }));
                 };
                 reader.readAsDataURL(file);
             }
@@ -41,19 +39,21 @@ const UpdateProduct = () => {
         }
     };
 
-    // Guardar cambios en LocalStorage y redirigir
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!product.title || !product.category || !product.description ||!product.price || !product.image) {
+        if (!product.title || !product.category || !product.price || !product.image) {
             alert("Todos los campos son obligatorios");
             return;
         }
-        
-        let storedProducts = JSON.parse(localStorage.getItem("productos")) || [];
-        storedProducts = storedProducts.map(prod => prod.id === parseInt(id) ? product : prod);
-        localStorage.setItem("productos", JSON.stringify(storedProducts));
+
+        const storedProducts = JSON.parse(localStorage.getItem("productos")) || [];
+        const updatedProducts = storedProducts.map((p) => (p.id === Number(id) ? product : p));
+
+        localStorage.setItem("productos", JSON.stringify(updatedProducts));
+        alert("Producto actualizado correctamente");
         navigate("/products");
     };
+
 
     return (
         <div className="container mt-4">
@@ -84,7 +84,7 @@ const UpdateProduct = () => {
                         <img src={product.preview} alt="Vista previa" className="img-fluid rounded" style={{ maxWidth: "200px", height: "auto", objectFit: "contain" }} />
                     </div>
                 )}
-                <button type="submit" className="btn btn-primary w-100">Guardar Cambios</button>
+                <button type="submit" className="btn btn-success w-100">Guardar Cambios</button>
             </form>
         </div>
     );

@@ -12,7 +12,6 @@ const AddProduct = () => {
         image: "",
     });
 
-    // Manejar cambios en los inputs
     const handleChange = (e) => {
         if (e.target.name === "image") {
             const file = e.target.files[0];
@@ -28,26 +27,21 @@ const AddProduct = () => {
         }
     };
 
-    
 
-    // Guardar en LocalStorage y redirigir a /products
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!newProduct.title || !newProduct.category || !newProduct.price || !newProduct.image) {
             alert("Todos los campos son obligatorios");
             return;
         }
-        
-        // Obtener productos guardados
+
         const storedProducts = JSON.parse(localStorage.getItem("productos")) || [];
 
-        // Agregar el nuevo producto a la lista
         const updatedProducts = [...storedProducts, { ...newProduct, id: Date.now() }];
 
-        // Guardar en LocalStorage
         localStorage.setItem("productos", JSON.stringify(updatedProducts));
 
-        // Redirigir a /products
         navigate("/products");
     };
 
