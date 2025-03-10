@@ -3,3 +3,9 @@ Jornada de trabajo grupal de programacion WEB
 
 Validacion del listado de producto
 ![Imagen de WhatsApp 2025-03-09 a las 21 48 02_b1b41686](https://github.com/user-attachments/assets/f9fc9837-3fed-4af1-b7bf-e09e4fc030ca)
+
+Arreglo sobre redireccionamiento a los productos al ejecutar el programa.
+![Captura de pantalla 2025-03-10 141845](https://github.com/user-attachments/assets/bbb89d13-d244-48ab-a248-d7ceb30d9ae9)
+
+Vista de la pagina de nuestra tienda virtual.
+![Captura de pantalla 2025-03-10 141908](https://github.com/user-attachments/assets/13a7a6c2-5a74-4855-9d47-989e55ec6668)
