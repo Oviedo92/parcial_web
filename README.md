@@ -1,1 +1,5 @@
-# parcial_web
+Jornada de trabajo grupal de programacion WEB
+![Imagen de WhatsApp 2025-03-09 a las 21 44 30_e38dcc50](https://github.com/user-attachments/assets/53b9b0be-6144-42fb-8ea3-d189cf45b5f2)
+
+Validacion del listado de producto
+![Imagen de WhatsApp 2025-03-09 a las 21 48 02_b1b41686](https://github.com/user-attachments/assets/f9fc9837-3fed-4af1-b7bf-e09e4fc030ca)
