@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AddProduct = () => {
+
+
     const navigate = useNavigate();
     const [newProduct, setNewProduct] = useState({
         title: "",
@@ -11,6 +13,17 @@ const AddProduct = () => {
         price: "",
         image: "",
     });
+
+    const [categories, setCategories] = useState([]); // Estado para categorías
+
+    // 🔹 useEffect para obtener categorías al montar el componente
+
+    useEffect(() => {
+        fetch("https://fakestoreapi.com/products/categories")
+            .then((res) => res.json())
+            .then((data) => setCategories(data))
+            .catch((error) => console.error("Error cargando categorías:", error));
+    }, []);
 
     const handleChange = (e) => {
         if (e.target.name === "image") {
@@ -48,6 +61,9 @@ const AddProduct = () => {
     return (
         <div className="container mt-4">
             <h2 className="text-center mb-4">➕ Agregar Nuevo Producto</h2>
+            <button className="btn btn-success" onClick={() => navigate("/products")}>
+                Volver a inicio
+            </button>
             <form onSubmit={handleSubmit} className="card p-4 shadow-sm">
                 <div className="mb-3">
                     <label className="form-label">Nombre del Producto</label>
@@ -55,7 +71,12 @@ const AddProduct = () => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Categoría</label>
-                    <input type="text" name="category" className="form-control" value={newProduct.category} onChange={handleChange} required />
+                    <select name="category" className="form-control" value={newProduct.category} onChange={handleChange} required>
+                        <option value="">Seleccione una categoría</option>
+                        {categories.map((category, index) => (
+                            <option key={index} value={category}>{category}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Descripción</label>
